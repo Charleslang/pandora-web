@@ -1,14 +1,22 @@
 <template>
   <div>
     <div class="button-wrapper">
-      <a-button type="primary">格式校验</a-button>
-      <a-button type="primary" style="background-color: pink;">美化</a-button>
-      <AppButton :buttonType="'success'">压缩</AppButton>
-      <a-button type="primary">转义</a-button>
-      <a-button type="primary">去除转义</a-button>
-      <a-button type="primary">转 GET 参数</a-button>
-      <a-button type="primary">复制结果</a-button>
-      <a-button type="primary" danger>清空</a-button>
+      <!-- 如果同时设置了 type 和 button-type, 则 type 无效 -->
+      <AppButton button-type="primary" plain>格式校验</AppButton>
+      <AppButton type="ghost">美化</AppButton>
+      <AppButton type="text">美化</AppButton>
+      <AppButton type="link">美化</AppButton>
+      <AppButton button-type="success" @click="testClick" plain>压缩</AppButton>
+      <AppButton @click="testClick" shape="circle" type="primary">
+        <template #icon>
+          <DownloadOutlined />
+        </template>
+      </AppButton>
+      <AppButton button-type="success">转义</AppButton>
+      <AppButton button-type="error" @click="testClick" shape="round" plain>去除转义</AppButton>
+      <AppButton >转 GET 参数</AppButton>
+      <AppButton button-type="warning" plain>复制结果</AppButton>
+      <AppButton type="primary" danger>清空</AppButton>
     </div>
     <div class="text-wrapper">
       <div class="top">
@@ -22,7 +30,12 @@
 </template>
 
 <script setup lang="ts">
+  import { DownloadOutlined } from '@ant-design/icons-vue';
   import AppButton from '@/components/AppButton.vue'
+
+  function testClick() {
+    console.log('test')
+  }
 </script>
 
 <style scoped>

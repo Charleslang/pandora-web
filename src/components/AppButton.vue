@@ -1,53 +1,73 @@
 <template>
+  <!-- v-bind="$attrs" 是透传 Attribute，参考 https://cn.vuejs.org/guide/components/attrs.html -->
   <a-button
     v-bind="$attrs"
-    type="primary"
-    :class="buttonClass"
+    :type="nativeType"
+    :class="[buttonClass, plainClass, 'app-btn']"
   >
+    <!-- 继承 ant-design 按钮自带的 slot, 见 https://www.jianshu.com/p/c3e0390ddff1 -->
+    <!-- #[name] 是表示插槽名称是动态的, 见 https://cn.vuejs.org/guide/components/slots.html#dynamic-slot-names -->
+    <template v-for="(index, name) in $slots" #[name]>
+      <slot :name="name"/>
+    </template>
     <!-- slot 用于显示 button 的文字, 例如 <AppButton>确认</AppButton> -->
-    <slot></slot>
+    <!-- <slot></slot> -->
   </a-button>
 </template>
 
-<script>
+<script setup lang="ts" name="AppButton">
   // 参考 https://www.jianshu.com/p/0b2fde46c761
-  import { defineComponent, ref, watch, onMounted } from 'vue'
-  export default defineComponent({
-    name: 'AppButton',
-    props: {
-      buttonType: {
-        type: String,
-        require: false,
-        default: () => 'primary'
-      }
-    },
-    setup (props, ctx) {
-      const buttonClass = ref(props.buttonType)
-      onMounted(()=>console.log(ctx.attrs))
-      watch(() => props.buttonType, (v) => {
-        switch (v) {
-          case 'success':
-            buttonClass.value = 'app-button-success'
-            break
-          case 'warning':
-            buttonClass.value = 'app-button-warning'
-            break
-          case 'error':
-            buttonClass.value = 'app-button-error'
-            break
-          case 'info':
-            buttonClass.value = 'app-button-info'
-            break
-        }
-      }, { immediate: true })
+  import { defineComponent, ref, watch, onMounted, useAttrs } from 'vue'
 
-      watch(() => props, () => {}, { immediate: true })
+  import type { ButtonType } from 'ant-design-vue/lib/button'
 
-      return {
-        buttonClass
-      }
-    }
+  interface Props {
+    type?: ButtonType,
+    buttonType?: string,
+    plain?: boolean
+  }
+
+  const props = defineProps<Props>()
+
+  const buttonClass = ref(props.buttonType)
+  const nativeType= ref(props.type)
+  const plainClass = ref(props.plain ? 'app-btn-plain' : '')
+
+  onMounted(() => {
+    console.log(props.plain)
   })
+
+  // immediate 见 https://cn.vuejs.org/guide/essentials/watchers.html#eager-watchers
+  watch(() => props.buttonType, (v) => {
+    switch (v) {
+      case 'primary':
+        buttonClass.value = 'app-btn-primary'
+        break
+      case 'success':
+        buttonClass.value = 'app-btn-success'
+        break
+      case 'warning':
+        buttonClass.value = 'app-btn-warning'
+        break
+      case 'error':
+        buttonClass.value = 'app-btn-error'
+        break
+      case 'info':
+        buttonClass.value = 'app-btn-info'
+        break
+      default:
+        buttonClass.value = ''
+        break
+    }
+  }, { immediate: true })
+
+  watch(() => props.type, v => {
+    if (!v) {
+      nativeType.value = 'default'
+    }
+  }, { immediate: true })
+
+  watch(() => props, () => {}, { immediate: true })
 </script>
 
 <style scoped lang="less">
@@ -56,109 +76,175 @@
   // https://github.com/vueComponent/ant-design-vue/blob/main/components/style/themes/default.less
   @import 'ant-design-vue/dist/antd.less';
 
-  .app-button-success {
+  // type='primary'
+  .app-btn-primary {
+    color: #fff;
+    background-color: @primary-color;
+    border-color: @primary-color;
+  }
+
+  .app-btn-primary:hover,
+  .app-btn-primary:focus {
+    color: #fff;
+    background-color: @primary-color-hover;
+    border-color: @primary-color-hover;
+  }
+
+  .app-btn-primary:active {
+    color: #fff;
+    background-color: @primary-color-active;
+    border-color: @primary-color-active;
+  }
+
+  .app-btn-primary.app-btn-plain {
+    color: @primary-color;
+    background-color: #ecf5ff;
+    border-color: @primary-color;
+  }
+
+  .app-btn-primary.app-btn-plain:hover {
+    color: #fff;
+    background-color: @primary-color;
+    border-color: @primary-color;
+  }
+
+  // type='success'
+  .app-btn-success {
     color: #fff;
     background-color: @success-color;
     border-color: @success-color;
   }
-  .app-button-success:hover {
+  .app-btn-success:hover,
+  .app-btn-success:focus {
     color: #fff;
-    background-color: success-color-hover;
-    border-color: success-color-hover;
-  }
-  .app-button-success[disabled], .app-button-success[disabled]:hover, .app-button-success[disabled]:focus, .app-button-success[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: #d9d9d9;
-    text-shadow: none;
-    box-shadow: none;
-  }
-  .app-button-warning {
-    color: #fff;
-    background-color: #ff9900;
-    border-color: #ff9900;
-  }
-  .app-button-warning:hover {
-    color: #fff;
-    background-color: #fcac35;
-    border-color: #ff9900;
-  }
-  .app-button-warning[disabled], .app-button-warning[disabled]:hover, .app-button-warning[disabled]:focus, .app-button-warning[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: #d9d9d9;
-    text-shadow: none;
-    box-shadow: none;
+    background-color: @success-color-hover;
+    border-color: @success-color-hover;
   }
 
-  .app-button-error {
+  .app-btn-warning:active {
     color: #fff;
-    background-color: #ff3300;
-    border-color: #ff3300;
-  }
-  .app-button-error:hover {
-    color: #fff;
-    background-color: #fc653f;
-    border-color: #ff3300;
-  }
-  .app-button-error[disabled], .app-button-error[disabled]:hover, .app-button-error[disabled]:focus, .app-button-error[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: #d9d9d9;
-    text-shadow: none;
-    box-shadow: none;
+    background-color: @warning-color-active;
+    border-color: @warning-color-active;
   }
 
-  .app-button-cyan {
+  .app-btn-success.app-btn-plain {
+    color: @success-color;
+    background-color: #f0f9eb;
+    border-color: @success-color;
+  }
+
+  .app-btn-success.app-btn-plain:hover {
+    color: #fff;
+    background-color: @success-color;
+    border-color: @success-color;
+  }
+
+  // type='warning'
+  .app-btn-warning {
+    color: #fff;
+    background-color: @warning-color;
+    border-color: @warning-color;
+  }
+  .app-btn-warning:hover,
+  .app-btn-warning:focus {
+    color: #fff;
+    background-color: @warning-color-hover;
+    border-color: @warning-color-hover;
+  }
+
+  .app-btn-warning:active {
+    color: #fff;
+    background-color: @warning-color-active;
+    border-color: @warning-color-active;
+  }
+
+  .app-btn-warning.app-btn-plain {
+    color: @warning-color;
+    background-color: #fdf6ec;
+    border-color: @warning-color;
+  }
+
+  .app-btn-warning.app-btn-plain:hover {
+    color: #fff;
+    background-color: @warning-color;
+    border-color: @warning-color;
+  }
+
+  // type='error'
+  .app-btn-error {
+    color: #fff;
+    background-color: @error-color;
+    border-color: @error-color;
+  }
+  .app-btn-error:hover,
+  .app-btn-error:focus {
+    color: #fff;
+    background-color: @error-color-hover;
+    border-color: @error-color-hover;
+  }
+
+  .app-btn-error:active {
+    color: #fff;
+    background-color: @error-color-active;
+    border-color: @error-color-active;
+  }
+
+  .app-btn-error.app-btn-plain {
+    color: @error-color;
+    background-color: #fef0f0;
+    border-color: @error-color;
+  }
+
+  .app-btn-error.app-btn-plain:hover {
+    color: #fff;
+    background-color: @error-color;
+    border-color: @error-color;
+  }
+
+  .app-btn-cyan {
     color: #fff;
     background-color: #04c1e1;
     border-color: #04c1e1;
   }
-  .app-button-cyan:hover {
+  .app-btn-cyan:hover {
     color: #fff;
     background-color: #0ad5f8;
     border-color: #04c1e1;
   }
-  .app-button-cyan[disabled], .app-button-cyan[disabled]:hover, .app-button-cyan[disabled]:focus, .app-button-cyan[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: #d9d9d9;
-    text-shadow: none;
-    box-shadow: none;
-  }
 
-  .app-button-black {
+  .app-btn-black {
     color: #fff;
     background-color: #131313;
     border-color: #131313;
   }
-  .app-button-black:hover {
+  .app-btn-black:hover {
     color: #fff;
     background-color: #313131;
     border-color: #131313;
   }
-  .app-button-black[disabled], .app-button-black[disabled]:hover, .app-button-black[disabled]:focus, .app-button-black[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: #d9d9d9;
-    text-shadow: none;
-    box-shadow: none;
-  }
 
-  .app-button-purple {
+  .app-btn-purple {
     color: #fff;
     background-color: #B500FE;
     border-color: #B500FE;
   }
-  .app-button-purple:hover {
+  .app-btn-purple:hover {
     color: #fff;
     background-color: #c951fa;
     border-color: #B500FE;
   }
-  .app-button-purple[disabled], .app-button-purple[disabled]:hover, .app-button-purple[disabled]:focus, .app-button-purple[disabled]:active {
+
+  .app-btn.app-btn-plain {
+    transition-duration: .2s;
+  }
+
+  .app-btn[disabled], 
+  .app-btn[disabled]:hover, 
+  .app-btn[disabled]:focus, 
+  .app-btn[disabled]:active {
     color: rgba(0, 0, 0, 0.25);
     background: #f5f5f5;
-    border-color: #d9d9d9;
+    border-color: @normal-color;
     text-shadow: none;
     box-shadow: none;
   }

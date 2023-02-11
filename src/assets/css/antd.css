@@ -1,0 +1,12 @@
+/* 选中菜单时, 去掉右侧边框 */
+.ant-menu-item-selected:after {
+  border-right: none !important;
+}
+
+/* 切换菜单时, 去掉菜单右侧的边框 */
+.ant-menu-vertical .ant-menu-item:after, 
+.ant-menu-vertical-left .ant-menu-item:after,
+.ant-menu-vertical-right .ant-menu-item:after, 
+.ant-menu-inline .ant-menu-item:after {
+  border-right: none !important;
+}

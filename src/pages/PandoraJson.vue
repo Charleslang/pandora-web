@@ -2,8 +2,8 @@
   <div>
     <div class="button-wrapper">
       <a-button type="primary">格式校验</a-button>
-      <a-button type="primary">美化</a-button>
-      <a-button type="primary">压缩</a-button>
+      <a-button type="primary" style="background-color: pink;">美化</a-button>
+      <AppButton :buttonType="'success'">压缩</AppButton>
       <a-button type="primary">转义</a-button>
       <a-button type="primary">去除转义</a-button>
       <a-button type="primary">转 GET 参数</a-button>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup lang="ts">
-  
+  import AppButton from '@/components/AppButton.vue'
 </script>
 
 <style scoped>

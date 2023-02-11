@@ -4,6 +4,12 @@ html, body {
   font-family: 'nunito_for_arco', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;;
 }
 
+/* FireFox 滚动条 */
+* {
+  scrollbar-width: thin;
+}
+
+/* 滚动条样式 */
 ::-webkit-scrollbar {
   width: 5px;
   height: 8px;

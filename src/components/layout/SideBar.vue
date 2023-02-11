@@ -1,14 +1,21 @@
 <template>
   <div class="menu-wrapper">
-    <div class="logo">Pandora</div>
+    <div class="logo">Pandora123</div>
+
+    <!-- :inline-collapsed="collapsed" -->
+    <!-- 如果 menu 是放在 a-layout 中的，那么 menu 的展开或收起应该由 layout 控制，否则浏览器报错如下 -->
+    <!-- `inlineCollapsed` not control Menu under Sider. Should set `collapsed` on Sider instead. -->
     <a-menu 
       @click="handleMenuClick"
+      mode="inline"
       :theme="theme" 
       :selectedKeys="selectedKeys"
       :openKeys="openKeys"
-      mode="inline">
+      >
 
-      <AppMenu :menu-list="dynamicRoute"/>
+      <template v-if="dynamicRoute && dynamicRoute.length">
+        <AppMenu :menu-list="dynamicRoute"/>
+      </template>
 
     </a-menu>
   </div>
@@ -16,21 +23,12 @@
 
 <script setup lang="ts">
 
-  import {
-    PieChartOutlined,
-    DesktopOutlined,
-    UserOutlined,
-    TeamOutlined,
-    FileOutlined,
-    EllipsisOutlined,
-  } from '@ant-design/icons-vue'
-
   import { onMounted, ref } from 'vue';
   import { useRouter, useRoute } from 'vue-router'
   import AppMenu from './AppMenu.vue'
   import { dynamicRoute } from '@/settings'
   
-  defineProps(['theme'])
+  defineProps(['theme', 'collapsed'])
   
   const selectedKeys = ref<string[]>(['/'])
   const openKeys = ref<string[]>([])
@@ -81,17 +79,8 @@
     padding: 10px 0;
     font-size: 20px;
     color: #1D2129;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
   }
-  /* #components-layout-demo-side .logo {
-    height: 32px;
-    margin: 16px;
-    background: rgba(255, 255, 255, 0.3);
-  }
-
-  .site-layout .site-layout-background {
-    background: #fff;
-  }
-  [data-theme='dark'] .site-layout .site-layout-background {
-    background: #141414;
-  } */
 </style>

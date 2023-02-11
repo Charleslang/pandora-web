@@ -1,3 +1,39 @@
+/* 修改菜单的 padding */
+ul.ant-menu.ant-menu-root {
+  padding: 0 20px;
+}
+
+/* 修改菜单颜色 */
+ul.ant-menu.ant-menu-root .ant-menu-submenu:hover {
+  color: #165DFF;
+  background-color: #f2f3f5;
+}
+
+ul.ant-menu.ant-menu-root .ant-menu-item:hover {
+  color: #165DFF;
+  background-color: #f2f3f5;
+  /* 阻止 hover 冒泡 */
+  /* pointer-events: none; */
+}
+
+ul.ant-menu.ant-menu-root .ant-menu-item-selected {
+  color: #165DFF;
+  background-color: #f2f3f5;
+}
+
+/* 修改菜单的 padding */
+/* ul.ant-menu.ant-menu-root .ant-menu-item,
+ul.ant-menu.ant-menu-root .ant-menu-submenu-title {
+  padding: 0 16px !important;
+}
+
+ul.ant-menu.ant-menu-root .ant-menu.ant-menu-inline-collapsed > .ant-menu-item, 
+ul.ant-menu.ant-menu-root .ant-menu.ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-list > .ant-menu-item, 
+ul.ant-menu.ant-menu-root .ant-menu.ant-menu-inline-collapsed > .ant-menu-item-group > .ant-menu-item-group-list > .ant-menu-submenu > .ant-menu-submenu-title, 
+ul.ant-menu.ant-menu-root .ant-menu.ant-menu-inline-collapsed > .ant-menu-submenu > .ant-menu-submenu-title {
+  padding: 0 calc(50% - 16px / 2) !important;
+} */
+
 /* 选中菜单时, 去掉右侧边框 */
 .ant-menu-item-selected:after {
   border-right: none !important;

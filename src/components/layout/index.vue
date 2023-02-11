@@ -1,22 +1,23 @@
 <template>
   <a-layout style="min-height: 100vh">
+    <!-- 使用 trigger="null" 去掉 a-layout-sider 下方的 toggle -->
     <a-layout-sider 
-      :collapsible="false"
+      collapsible
       :collapsed="collapsed"
+      :trigger="null"
       :theme="theme"
-      :width="220"
-      :class="'app-layout-sider'">
-      <SideBar :theme="theme"/>
+      :width="220">
+      <SideBar :theme="theme" :collapsed="collapsed"/>
     </a-layout-sider>
     <a-layout>
       <a-layout-header style="background: #fff; padding: 0">
-        <HeaderNav @changeMenuFold="handleChangeMenuFold"/>
+        <HeaderNav @collapseMenu="handleMenuCollapsed"/>
       </a-layout-header>
       <a-layout-content style="padding: 1.2rem 1.2rem 0.75rem">
         <AppMain/>
       </a-layout-content>
       <a-layout-footer style="text-align: center">
-        Ant Design ©2018 Created by Ant UED
+        Pandora © 2023 - present Created by Junfeng Dai
       </a-layout-footer>
     </a-layout>
   </a-layout>
@@ -31,8 +32,8 @@
   const collapsed = ref<boolean>(false)
   const theme = ref<"dark" | "light" | undefined>('light')
   
-  function handleChangeMenuFold(menuFold: boolean) {
-    collapsed.value = !menuFold
+  function handleMenuCollapsed(menuFold: boolean) {
+    collapsed.value = menuFold
   }
 
 </script>

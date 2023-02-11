@@ -18,6 +18,14 @@ export default defineConfig({
       resolvers: [AntDesignVueResolver()],
     })
   ],
+  // 如果你使用了 less, 则需要引用使用 less 的库要配置一下
+  css: {
+    preprocessorOptions: {
+      less: {
+        javascriptEnabled: true
+      }
+    }
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url))

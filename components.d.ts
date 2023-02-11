@@ -17,6 +17,7 @@ declare module '@vue/runtime-core' {
     ALayoutSider: typeof import('ant-design-vue/es')['LayoutSider']
     AMenu: typeof import('ant-design-vue/es')['Menu']
     AMenuItem: typeof import('ant-design-vue/es')['MenuItem']
+    AppButton: typeof import('./src/components/AppButton.vue')['default']
     AppMain: typeof import('./src/components/layout/AppMain.vue')['default']
     AppMenu: typeof import('./src/components/layout/AppMenu.vue')['default']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']

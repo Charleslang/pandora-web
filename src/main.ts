@@ -1,13 +1,16 @@
 import { createApp } from 'vue'
-import router from './router'
-
 import App from './App.vue'
 
-// import './assets/main.css'
-import './assets/css/app.css'
+import router from './router'
+
+/* 加载 ant 的 message 样式 */
+import 'ant-design-vue/es/message/style/css';
 
 // 动态注册所有 icon 无奈之举
 import * as antIcons from '@ant-design/icons-vue'
+
+// import './assets/main.css'
+import './assets/css/app.css'
 
 const app = createApp(App)
 

@@ -26,7 +26,7 @@
 </script>
 
 <style scoped>
-  .button-wrapper, .text-wrapper, .select-wrapper {
+  .text-wrapper, .select-wrapper {
     margin-top: 22px;
   }
 

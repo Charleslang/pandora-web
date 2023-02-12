@@ -22,6 +22,7 @@ declare module '@vue/runtime-core' {
     AppMenu: typeof import('./src/components/layout/AppMenu.vue')['default']
     ASubMenu: typeof import('ant-design-vue/es')['SubMenu']
     ATextarea: typeof import('ant-design-vue/es')['Textarea']
+    ATooltip: typeof import('ant-design-vue/es')['Tooltip']
     HeaderNav: typeof import('./src/components/layout/HeaderNav.vue')['default']
     Layout: typeof import('./src/components/layout/index.vue')['default']
     RouterLink: typeof import('vue-router')['RouterLink']

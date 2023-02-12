@@ -4,9 +4,20 @@ html, body {
   font-family: 'nunito_for_arco', 'Helvetica Neue', Helvetica, 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', '微软雅黑', Arial, sans-serif;;
 }
 
+ul, li {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
 /* FireFox 滚动条 */
 * {
   scrollbar-width: thin;
+}
+
+a, a:hover, a:active, a:visited {
+  text-decoration:none;
+  color:#000;
 }
 
 /* 滚动条样式 */

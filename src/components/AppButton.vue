@@ -21,21 +21,19 @@
 
   import type { ButtonType } from 'ant-design-vue/lib/button'
 
+  type AppButtonType = 'primary' | 'success' | 'warning' | 'danger' | 'info' | undefined
+
   interface Props {
     type?: ButtonType,
-    buttonType?: string,
+    buttonType?: AppButtonType,
     plain?: boolean
   }
 
   const props = defineProps<Props>()
 
-  const buttonClass = ref(props.buttonType)
+  const buttonClass = ref<any>(props.buttonType)
   const nativeType= ref(props.type)
   const plainClass = ref(props.plain ? 'app-btn-plain' : '')
-
-  onMounted(() => {
-    console.log(props.plain)
-  })
 
   // immediate 见 https://cn.vuejs.org/guide/essentials/watchers.html#eager-watchers
   watch(() => props.buttonType, (v) => {
@@ -49,8 +47,8 @@
       case 'warning':
         buttonClass.value = 'app-btn-warning'
         break
-      case 'error':
-        buttonClass.value = 'app-btn-error'
+      case 'danger':
+        buttonClass.value = 'app-btn-danger'
         break
       case 'info':
         buttonClass.value = 'app-btn-info'
@@ -75,165 +73,121 @@
   // 使用 antd 中定义的变量
   // https://github.com/vueComponent/ant-design-vue/blob/main/components/style/themes/default.less
   @import 'ant-design-vue/dist/antd.less';
+  @import '@/assets/less/app.less';
 
   // type='primary'
   .app-btn-primary {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @primary-color;
     border-color: @primary-color;
   }
-
   .app-btn-primary:hover,
   .app-btn-primary:focus {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @primary-color-hover;
     border-color: @primary-color-hover;
   }
-
   .app-btn-primary:active {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @primary-color-active;
     border-color: @primary-color-active;
   }
-
-  .app-btn-primary.app-btn-plain {
+  .app-btn-primary.app-btn-plain,
+  .ant-btn.ant-btn-primary.app-btn-plain {
     color: @primary-color;
-    background-color: #ecf5ff;
-    border-color: @primary-color;
+    background-color: @app-color-primary-light-1; // #ecf5ff;
+    border-color: @app-color-primary-light-5;
   }
-
-  .app-btn-primary.app-btn-plain:hover {
-    color: #fff;
+  .app-btn-primary.app-btn-plain:hover,
+  .ant-btn.ant-btn-primary.app-btn-plain:hover {
+    color: @btn-primary-color;
     background-color: @primary-color;
     border-color: @primary-color;
   }
 
   // type='success'
   .app-btn-success {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @success-color;
     border-color: @success-color;
   }
   .app-btn-success:hover,
   .app-btn-success:focus {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @success-color-hover;
     border-color: @success-color-hover;
   }
-
   .app-btn-warning:active {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @warning-color-active;
     border-color: @warning-color-active;
   }
-
   .app-btn-success.app-btn-plain {
     color: @success-color;
-    background-color: #f0f9eb;
-    border-color: @success-color;
+    background-color: @app-color-success-light-1; // #f0f9eb;
+    border-color: @app-color-success-light-5;
   }
-
   .app-btn-success.app-btn-plain:hover {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @success-color;
     border-color: @success-color;
   }
 
   // type='warning'
   .app-btn-warning {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @warning-color;
     border-color: @warning-color;
   }
   .app-btn-warning:hover,
   .app-btn-warning:focus {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @warning-color-hover;
     border-color: @warning-color-hover;
   }
-
   .app-btn-warning:active {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @warning-color-active;
     border-color: @warning-color-active;
   }
-
   .app-btn-warning.app-btn-plain {
     color: @warning-color;
-    background-color: #fdf6ec;
-    border-color: @warning-color;
+    background-color: @app-color-warning-light-1; // #fdf6ec
+    border-color: @app-color-warning-light-5;
   }
-
   .app-btn-warning.app-btn-plain:hover {
-    color: #fff;
+    color: @btn-primary-color;
     background-color: @warning-color;
     border-color: @warning-color;
   }
 
-  // type='error'
-  .app-btn-error {
-    color: #fff;
-    background-color: @error-color;
-    border-color: @error-color;
+  // type='danger'
+  .app-btn-danger {
+    color: @btn-primary-color;
+    background-color: @btn-danger-bg;
+    border-color: @btn-danger-border;
   }
-  .app-btn-error:hover,
-  .app-btn-error:focus {
-    color: #fff;
+  .app-btn-danger:hover,
+  .app-btn-danger:focus {
+    color: @btn-primary-color;
     background-color: @error-color-hover;
     border-color: @error-color-hover;
   }
-
-  .app-btn-error:active {
-    color: #fff;
+  .app-btn-danger:active {
+    color: @btn-primary-color;
     background-color: @error-color-active;
     border-color: @error-color-active;
   }
-
-  .app-btn-error.app-btn-plain {
+  .app-btn-danger.app-btn-plain {
     color: @error-color;
-    background-color: #fef0f0;
-    border-color: @error-color;
+    background-color: @app-color-danger-light-1; // todo #fef0f0
+    border-color: @app-color-danger-light-4;
   }
-
-  .app-btn-error.app-btn-plain:hover {
-    color: #fff;
-    background-color: @error-color;
-    border-color: @error-color;
+  .app-btn-danger.app-btn-plain:hover {
+    color: @btn-primary-color;
+    background-color: @btn-danger-bg;
+    border-color: @btn-danger-border;
   }
-
-  .app-btn-cyan {
-    color: #fff;
-    background-color: #04c1e1;
-    border-color: #04c1e1;
-  }
-  .app-btn-cyan:hover {
-    color: #fff;
-    background-color: #0ad5f8;
-    border-color: #04c1e1;
-  }
-
-  .app-btn-black {
-    color: #fff;
-    background-color: #131313;
-    border-color: #131313;
-  }
-  .app-btn-black:hover {
-    color: #fff;
-    background-color: #313131;
-    border-color: #131313;
-  }
-
-  .app-btn-purple {
-    color: #fff;
-    background-color: #B500FE;
-    border-color: #B500FE;
-  }
-  .app-btn-purple:hover {
-    color: #fff;
-    background-color: #c951fa;
-    border-color: #B500FE;
-  }
-
   .app-btn.app-btn-plain {
     transition-duration: .2s;
   }
@@ -242,9 +196,9 @@
   .app-btn[disabled]:hover, 
   .app-btn[disabled]:focus, 
   .app-btn[disabled]:active {
-    color: rgba(0, 0, 0, 0.25);
-    background: #f5f5f5;
-    border-color: @normal-color;
+    color: @btn-disable-color;
+    background: @disabled-bg;
+    border-color: @btn-disable-border;
     text-shadow: none;
     box-shadow: none;
   }

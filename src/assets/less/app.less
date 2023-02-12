@@ -1,0 +1,130 @@
+@import 'ant-design-vue/lib/style/color/colors.less'; 
+
+@app-types: primary, success, warning, danger, error, info;
+@app-types-lenth: length(@app-types);
+@color-namespace: app-color;
+
+#app-library() {
+  .colors() {
+    white: #ffffff;
+    black: #000000; 
+    primary: @blue-base;
+    success: @green-base;
+    warning: @orange-base;
+    danger: @red-5;
+    error: @red-base;
+    info: #909399;
+  }
+}
+
+/*
+ * init
+ */
+@app-colors: #app-library.colors();
+@app-color-white: @app-colors[white];
+@app-color-black: @app-colors[black];
+
+// ---------------- Colors ----------------
+// @see https://github.com/vueComponent/ant-design-vue/blob/main/components/style/color/colors.less
+// >>> Primary
+@app-color-primary-base: @app-colors[primary];
+@app-color-primary-light-1: color(~`colorPalette('@{app-color-primary-base}', 1) `);
+@app-color-primary-light-2: color(~`colorPalette('@{app-color-primary-base}', 2) `);
+@app-color-primary-light-3: color(~`colorPalette('@{app-color-primary-base}', 3) `);
+@app-color-primary-light-4: color(~`colorPalette('@{app-color-primary-base}', 4) `);
+@app-color-primary-light-5: color(~`colorPalette('@{app-color-primary-base}', 5) `);
+@app-color-primary: @app-color-primary-base;
+@app-color-primary-dark-7: color(~`colorPalette('@{app-color-primary-base}', 7) `);
+@app-color-primary-dark-8: color(~`colorPalette('@{app-color-primary-base}', 8) `);
+@app-color-primary-dark-9: color(~`colorPalette('@{app-color-primary-base}', 9) `);
+@app-color-primary-dark-10: color(~`colorPalette('@{app-color-primary-base}', 10) `);
+
+// >>> Success
+@app-color-success-base: @app-colors[success];
+@app-color-success-light-1: color(~`colorPalette('@{app-color-success-base}', 1) `);
+@app-color-success-light-2: color(~`colorPalette('@{app-color-success-base}', 2) `);
+@app-color-success-light-3: color(~`colorPalette('@{app-color-success-base}', 3) `);
+@app-color-success-light-4: color(~`colorPalette('@{app-color-success-base}', 4) `);
+@app-color-success-light-5: color(~`colorPalette('@{app-color-success-base}', 5) `);
+@app-color-success: @app-color-success-base;
+@app-color-success-dark-7: color(~`colorPalette('@{app-color-success-base}', 7) `);
+@app-color-success-dark-8: color(~`colorPalette('@{app-color-success-base}', 8) `);
+@app-color-success-dark-9: color(~`colorPalette('@{app-color-success-base}', 9) `);
+@app-color-success-dark-10: color(~`colorPalette('@{app-color-success-base}', 10) `);
+
+// >>> Warning
+@app-color-warning-base: @app-colors[warning];
+@app-color-warning-light-1: color(~`colorPalette('@{app-color-warning-base}', 1) `);
+@app-color-warning-light-2: color(~`colorPalette('@{app-color-warning-base}', 2) `);
+@app-color-warning-light-3: color(~`colorPalette('@{app-color-warning-base}', 3) `);
+@app-color-warning-light-4: color(~`colorPalette('@{app-color-warning-base}', 4) `);
+@app-color-warning-light-5: color(~`colorPalette('@{app-color-warning-base}', 5) `);
+@app-color-warning: @app-color-warning-base;
+@app-color-warning-dark-7: color(~`colorPalette('@{app-color-warning-base}', 7) `);
+@app-color-warning-dark-8: color(~`colorPalette('@{app-color-warning-base}', 8) `);
+@app-color-warning-dark-9: color(~`colorPalette('@{app-color-warning-base}', 9) `);
+@app-color-warning-dark-10: color(~`colorPalette('@{app-color-warning-base}', 10) `);
+
+// >>> Danger
+@app-color-danger-base: @app-colors[danger];
+@app-color-danger-light-1: color(~`colorPalette('@{app-color-danger-base}', 1) `);
+@app-color-danger-light-2: color(~`colorPalette('@{app-color-danger-base}', 2) `);
+@app-color-danger-light-3: color(~`colorPalette('@{app-color-danger-base}', 3) `);
+@app-color-danger-light-4: color(~`colorPalette('@{app-color-danger-base}', 4) `);
+@app-color-danger: @app-color-danger-base;
+@app-color-danger-dark-6: color(~`colorPalette('@{app-color-danger-base}', 6) `);
+@app-color-danger-dark-7: color(~`colorPalette('@{app-color-danger-base}', 7) `);
+@app-color-danger-dark-8: color(~`colorPalette('@{app-color-danger-base}', 8) `);
+@app-color-danger-dark-9: color(~`colorPalette('@{app-color-danger-base}', 9) `);
+@app-color-danger-dark-10: color(~`colorPalette('@{app-color-danger-base}', 10) `);
+
+// >>> Error
+@app-color-error-base: @app-colors[error];
+@app-color-error-light-1: color(~`colorPalette('@{app-color-error-base}', 1) `);
+@app-color-error-light-2: color(~`colorPalette('@{app-color-error-base}', 2) `);
+@app-color-error-light-3: color(~`colorPalette('@{app-color-error-base}', 3) `);
+@app-color-error-light-4: color(~`colorPalette('@{app-color-error-base}', 4) `);
+@app-color-error-light-5: color(~`colorPalette('@{app-color-error-base}', 5) `);
+@app-color-error: @app-color-error-base;
+@app-color-error-dark-7: color(~`colorPalette('@{app-color-error-base}', 7) `);
+@app-color-error-dark-8: color(~`colorPalette('@{app-color-error-base}', 8) `);
+@app-color-error-dark-9: color(~`colorPalette('@{app-color-error-base}', 9) `);
+@app-color-error-dark-10: color(~`colorPalette('@{app-color-error-base}', 10) `);
+
+// >>> Info
+@app-color-info-base: @app-colors[info];
+@app-color-info-light-1: color(~`colorPalette('@{app-color-info-base}', 1) `);
+@app-color-info-light-2: color(~`colorPalette('@{app-color-info-base}', 2) `);
+@app-color-info-light-3: color(~`colorPalette('@{app-color-info-base}', 3) `);
+@app-color-info-light-4: color(~`colorPalette('@{app-color-info-base}', 4) `);
+@app-color-info-light-5: color(~`colorPalette('@{app-color-info-base}', 5) `);
+@app-color-info: @app-color-info-base;
+@app-color-info-dark-7: color(~`colorPalette('@{app-color-info-base}', 7) `);
+@app-color-info-dark-8: color(~`colorPalette('@{app-color-info-base}', 8) `);
+@app-color-info-dark-9: color(~`colorPalette('@{app-color-info-base}', 9) `);
+@app-color-info-dark-10: color(~`colorPalette('@{app-color-info-base}', 10) `);
+
+// .for(@tpye-list, @i: 1) when(@i =< @app-types-lenth) {
+//   @type-item: extract(@tpye-list, @i);
+//   .set-color-mix-level(@type-item, (@i + 1), 'light');
+//   .for(@tpye-list, (@i + 1));
+// }
+// .for(@app-types);
+
+/*
+ * 生成颜色变量
+ */
+.set-color-mix-level(
+  @type,
+  @number,
+  @mode: 'light'
+) {
+  #library() {
+    .colors() { app-color-@{type}-@{mode}-@{number}: color(~`colorPalette('@{type}', @{number}) `); }
+  }
+}
+
+// .getColor(@name) {
+//   // @final-name: @color-namespace + '-' + @name;
+//   @color: @app-colors[~"@{color-namespace}-@{name}"];
+// }

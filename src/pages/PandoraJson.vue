@@ -2,7 +2,7 @@
   <div>
     <div class="button-wrapper">
       <!-- 如果同时设置了 type 和 button-type, 则 type 无效 -->
-      <AppButton button-type="primary" plain>格式校验</AppButton>
+      <AppButton type="primary" plain>格式校验</AppButton>
       <AppButton type="ghost">美化</AppButton>
       <AppButton type="text">美化</AppButton>
       <AppButton type="link">美化</AppButton>
@@ -13,7 +13,7 @@
         </template>
       </AppButton>
       <AppButton button-type="success">转义</AppButton>
-      <AppButton button-type="error" @click="testClick" shape="round" plain>去除转义</AppButton>
+      <AppButton button-type="danger" @click="testClick" shape="round" plain>去除转义</AppButton>
       <AppButton >转 GET 参数</AppButton>
       <AppButton button-type="warning" plain>复制结果</AppButton>
       <AppButton type="primary" danger>清空</AppButton>

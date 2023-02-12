@@ -27,7 +27,14 @@
       <a-layout-content
         :style="{ margin: '24px 16px', padding: '24px', background: '#fff', minHeight: '280px' }"
       >
-        Content
+        <div>
+          <a-tooltip placement="bottom">
+            <template #title>
+              <span>{{ text }}</span>
+            </template>
+            <a-button>Bottom</a-button>
+          </a-tooltip>
+        </div>
       </a-layout-content>
     </a-layout>
   </a-layout>
@@ -37,6 +44,7 @@
 import { ref } from 'vue';
 
   const collapsed = ref<boolean | undefined>(true)
+  const text = ref('测试')
 </script>
 
 <style scoped>
